@@ -1,0 +1,296 @@
+
+<div class="bodycontainer"></div>
+
+
+<div>
+    <h1>Skycliff IT Solutions</h1>
+  <button class="btn btn-primary" (click)="open(content)">Add Location</button>&nbsp;&nbsp;
+</div>
+
+<div class="col-md-3">
+    <input type="text" #f (keyup)="search(f.value)" placeholder="serch here">
+    <label>search</label>
+  </div>
+
+<table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Address</th>
+      <th>City </th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Country</th>
+      <th>Phone1</th>
+      <th>Phone2</th>
+      <th>Fax</th>
+      <th>Website</th>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of arr">
+        <td >{{item.name}}</td>
+        <td >{{item.description}}</td>
+        <td> {{item.adress}}</td>
+        <td> {{item.city}}</td>
+        <td> {{item.state}}</td>
+        <td> {{item.zip}}</td>
+        <td> {{item.country}}</td>
+        <td> {{item.phone1}}</td>
+        <td> {{item.phone2}}</td>
+        <td> {{item.fax}} </td>
+        <td> {{item.website}} </td>
+
+        <p>
+            <button (click)="deleteTask(item)"  type="button"  class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+            </button>&nbsp;&nbsp;
+            <button class="btn 2" (click)="open(contents,item)">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
+            </button>
+        </p>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<!-- @-------------------------------Addition--------------------------------------------@ -->
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add </h4>
+      <button type="button" class="close bg bg-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">Close</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form>
+
+        <div class="form-group">
+          <label for="name">name</label>
+          <div class="input-group">
+            <input id="Name" [(ngModel)]="name" class="form-control" placeholder="Name" name="name">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">description</label>
+          <div class="input-group">
+            <input id="Description" [(ngModel)]="dec" class="form-control" placeholder="Description" name="dec">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adress">adress</label>
+          <div class="input-group">
+            <input id="adress" [(ngModel)]="address" class="form-control" placeholder="address" name="address">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">city</label>
+          <div class="input-group">
+            <input id="city" [(ngModel)]="city" class="form-control" placeholder="city" name="city">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">state</label>
+          <div class="input-group">
+            <input id="state" [(ngModel)]="state" class="form-control" placeholder="state" name="state">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="zip">zip</label>
+          <div class="input-group">
+            <input id="zip" [(ngModel)]="zip" class="form-control" placeholder="zip" name="zip">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="country">country</label>
+          <div class="input-group">
+            <input id="country" [(ngModel)]="country" class="form-control" placeholder="country" name="country">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone1">phone1</label>
+          <div class="input-group">
+            <input id="phone1" [(ngModel)]="phone" class="form-control" placeholder="phone1" name="phone1">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone2">phone 2</label>
+          <div class="input-group">
+            <input id="phone2" [(ngModel)]="phone2" class="form-control" placeholder="phone2" name="phone2">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fax">fax</label>
+          <div class="input-group">
+            <input id="fax" [(ngModel)]="fax" class="form-control" placeholder="fax" name="fax">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="website">website</label>
+          <div class="input-group">
+            <input id="website" [(ngModel)]="website" class="form-control" placeholder="website" name="website">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="onAddPlace()">submit</button>
+    </div>
+  </ng-template>
+
+
+
+
+  <!-- @-------------------------------Editing--------------------------------------------@ -->
+
+  <ng-template #contents let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+      <button type="button" class="close bg bg-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">&nbsp;&nbsp;
+        <span aria-hidden="true">Close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form>
+        <div class="form-group">
+          <label for="name">name</label>
+          <div class="input-group">
+            <input id="Name"   [(ngModel)]="name"  type=text class="form-control" placeholder="Name" name="name">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">description</label>
+          <div class="input-group">
+            <input id="Description"   [(ngModel)]="dec" type=text class="form-control" placeholder="Description" name="Description">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adress">adress</label>
+          <div class="input-group">
+            <input id="adress" [(ngModel)]="address"  type=text class="form-control" placeholder="adress" name="adress">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">city</label>
+          <div class="input-group">
+            <input id="city" [(ngModel)]="city" type=text class="form-control" placeholder="city" name="city">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="state">name</label>
+          <div class="input-group">
+            <input id="state" [(ngModel)]="state"  class="form-control" placeholder="state" name="state">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="zip">zip</label>
+          <div class="input-group">
+            <input id="zip" [(ngModel)]="zip" class="form-control" placeholder="zip" name="zip">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="country">country</label>
+          <div class="input-group">
+            <input id="country" [(ngModel)]="country" class="form-control" placeholder="country" name="country">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone1">phone1</label>
+          <div class="input-group">
+            <input id="phone1"[(ngModel)]="phone" class="form-control" placeholder="phone1" name="phone1">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone2">phone 2</label>
+          <div class="input-group">
+            <input id="phone2" [(ngModel)]="phone2" class="form-control" placeholder="phone2" name="phone2">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fax">fax</label>
+          <div class="input-group">
+            <input id="fax" [(ngModel)]="fax" class="form-control" placeholder="fax" name="fax">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="website">website</label>
+          <div class="input-group">
+            <input id="website"  [(ngModel)]="website" class="form-control" placeholder="website" name="website">
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">update</button>
+    </div>
+  </ng-template>
